@@ -14,3 +14,13 @@ Github Copilot came up with a better solultion!!! I can open the search page thr
 Then I can query on 5000 records. I tested all of this using postman and it worked! Max amount of records I can get out is currently 5k. So I will need to find a way to query the rest in a systematic way.
 
 I may or may not have gotten the request to work via python. Need to revisit once I have had some sleep :P
+
+
+The overall goal of this project is to showcase data science skills:
+- Data Mining
+- Data Cleansing
+- Data Analysis
+- Data Visualization
+- Data Modeling
+- Machine Learning
+- etc.
