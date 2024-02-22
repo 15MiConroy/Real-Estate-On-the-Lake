@@ -2,6 +2,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 import requests
 from bs4 import BeautifulSoup
+import time
 
 service = Service(executable_path='C:/Users/Micha/Downloads/chromedriver-win64/chromedriver.exe')
 driver = webdriver.Chrome(service=service) 
@@ -11,6 +12,8 @@ driver.get('https://auditor.lakecountyohio.gov/search/advancedsearch.aspx?mode=a
 
 # Get the page source and parse it with BeautifulSoup
 soup = BeautifulSoup(driver.page_source, 'html.parser')
+
+time.sleep(0.5)
 
 # Find the VIEWSTATE and EVENTVALIDATION values
 viewstate = soup.find(id="__VIEWSTATE")['value']
@@ -50,16 +53,9 @@ headers = {
     'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
     'Accept-Encoding': 'gzip, deflate, br',
     'Accept-Language': 'en-US,en;q=0.9',
-    'Cookie': 'ASP.NET_SessionId=gb20am4rotcdlconctlrwv5w',
     'Origin': 'https://auditor.lakecountyohio.gov',
-    'Pragma': 'no-cache',
     'Referer': 'https://auditor.lakecountyohio.gov/search/advancedsearch.aspx?mode=advanced',
-    'Cache-Control': 'no-cache',
     'Host': 'auditor.lakecountyohio.gov',
-    'Content-Length': '8103',
-    'Connection': 'keep-alive',
-    'User-Agent': 'PostmanRuntime/7.22.0',
-    'Postman-Token': '7aacde3e-f799-42ce-9917-fd3aa7e54255'
 }
 
 # Define the data for the POST request
@@ -126,11 +122,18 @@ params = {
     }
 
 # Send the POST request
-response = requests.post('https://auditor.lakecountyohio.gov/search/advancedsearch.aspx?mode=advanced', headers=headers, params=params)
+response = requests.post('https://auditor.lakecountyohio.gov/search/advancedsearch.aspx', headers=headers, params=params, data=data)
 
 # Print the response
 print(response.status_code)
 
-# #write the response to a file
-# with open('response.txt', 'w') as f:
-#     f.write(response.text)
+#write the response to a file
+response_soup = BeautifulSoup(response.text, 'html.parser')
+
+parcel_list = []
+
+for parcel in response_soup.findAll('input', {'id':'chkPin'}):
+    parcel_list.append(parcel.get('value').split(':')[1])
+
+with open('parcel_list.txt', 'w') as f:
+    f.write(str(parcel_list))
