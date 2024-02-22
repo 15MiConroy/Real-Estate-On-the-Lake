@@ -3,6 +3,7 @@ from selenium.webdriver.chrome.service import Service
 import requests
 from bs4 import BeautifulSoup
 import time
+import json
 
 service = Service(executable_path='C:/Users/Micha/Downloads/chromedriver-win64/chromedriver.exe')
 driver = webdriver.Chrome(service=service) 
@@ -102,12 +103,13 @@ print(response.status_code)
 # Parse the response with BeautifulSoup
 response_soup = BeautifulSoup(response.text, 'html.parser')
 
-parcel_list = []
-
+parcel_dict = {}
 # Get the parcel numbers
 for parcel in response_soup.findAll('input', {'id':'chkPin'}):
-    parcel_list.append(parcel.get('value').split(':')[1])
+    parcel_number = parcel.get('value').split(':')[1]
+    parcel_dict[parcel_number] = 'https://auditor.lakecountyohio.gov/Datalets/Datalet.aspx?UseSearch=no&pin=' + parcel_number
 
 # Write the parcel numbers to a file
-with open('parcel_list.txt', 'w') as f:
-    f.write(str(parcel_list))
+with open('parcels.json', 'w') as f:
+    #dump the dictionary to a json file'
+    json.dump(parcel_dict, f)

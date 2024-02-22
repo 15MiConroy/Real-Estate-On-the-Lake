@@ -31,3 +31,9 @@ EUREEKA! (idk how to spell it). I had 2 eureeka moments.
 2) After digging around I found out I CAN use the pacel id to search for the property information!
     - https://auditor.lakecountyohio.gov/Datalets/Datalet.aspx?UseSearch=no&pin=01A0010000090&mode=sales
     Where the 01A001..... is the parcel ID
+
+Potential approach to getting ALL parcel numbers:
+- Advanced search allows searching based on year built. Could loop through all years (1800-now)
+
+
+I also stumbled upon this site that actually has parcel data: https://gis-lakeohgis.opendata.arcgis.com/
