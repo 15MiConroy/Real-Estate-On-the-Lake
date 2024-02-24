@@ -8,6 +8,7 @@ The overall goal of this project is to showcase data science skills:
 - Data Visualization
 - Data Modeling
 - Machine Learning
+- Report Creation/Story Telling
 - etc.
 
 First step: Mine all residential data from https://auditor.lakecountyohio.gov/
@@ -37,3 +38,6 @@ Potential approach to getting ALL parcel numbers:
 
 
 I also stumbled upon this site that actually has parcel data: https://gis-lakeohgis.opendata.arcgis.com/
+
+
+Tried and was able to get sales data using the above link (2) with parcel ID and no headers, authorization, or data required. With this being the case, I think a reasonable solution would be to use the CSV dataset from GIS as the Parcel ID table (where parcel ID is the primary key). Then using the parcel ID we can scrape sales, tax, and residential data to create tables what use Parcel ID as a foreign key! With <150k parcels, this could realistically be ran EVERY DAY! 
