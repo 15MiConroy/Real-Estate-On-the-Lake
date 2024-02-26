@@ -4,7 +4,7 @@ Potential Classifications:
 - Is the property owned by a business?
 - Is the seller motivated? (through multiple price drops)
 - Would the property make a good flip?
-- Would the property make a good rental?
+- Would the property make a good rental?    
 
 Potential Regression:
 - Value of property?
